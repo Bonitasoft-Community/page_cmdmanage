@@ -21,16 +21,4 @@
 		<nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>customPage/7.8.3/Actions.groovy</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/bonita/BPM-SP-7.8.3/workspace/tomcat/server/temp/bonita_portal_20588@Dragon-Pierre-Yves/tenants/1/pages/custompage_cmdmanage/Actions.groovy</locationURI>
-		</link>
-		<link>
-			<name>customPage/7.8.3/Index.groovy</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/bonita/BPM-SP-7.8.3/workspace/tomcat/server/temp/bonita_portal_20588@Dragon-Pierre-Yves/tenants/1/pages/custompage_cmdmanage/Index.groovy</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

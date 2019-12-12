@@ -93,7 +93,59 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			
+			<!-- ******************** Copy JAR files under lib **************** -->		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<excludeTransitive>true</excludeTransitive>
+							<excludeScope>provided</excludeScope>
+						</configuration>
+					</execution>
 
+					<execution>
+						<id>copy-Jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/lib</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<overWrite>true</overWrite>
+								</artifactItem>
+							</artifactItems>
+							<resources>
+								<resource>
+									<directory>target</directory>
+									<includes>
+										<include>*.jar</include>
+									</includes>
+								</resource>
+							</resources>
+
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
 			<!-- generate a ZIP file -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
