@@ -14,28 +14,28 @@ public class CmdPing extends BonitaCommand {
 
   static String logHeader = "CmdPing ~~~";
 
-  @Override
-  public ExecuteAnswer executeCommandVerbe(String verb, Map<String, Serializable> parameters, long tenantId, TenantServiceAccessor serviceAccessor)
-  {
-    logger.info(logHeader+"Execute cmdPing");
-    ExecuteAnswer executeAnswer = new ExecuteAnswer();
-    executeAnswer.result.put("Status", "pong");
-    executeAnswer.result.put("VerbeAcknowledge", verb);
-    
-    String traceInput="Receive:";
-    if (parameters!=null)
-      for (String key:parameters.keySet())
-      {
-        traceInput+=key+",";
-      }
-    executeAnswer.result.put("traceInput", traceInput);
-    return executeAnswer;
-  }
 
   @Override
   public String getHelp(Map<String, Serializable> parameters, long tenantId, TenantServiceAccessor serviceAccessor) {
     return "Give parameters, the ping command will return it";
   }
+
+@Override
+public ExecuteAnswer executeCommand(ExecuteParameters parameters, TenantServiceAccessor arg1) {
+    logger.info(logHeader+"Execute cmdPing");
+    ExecuteAnswer executeAnswer = new ExecuteAnswer();
+    executeAnswer.result.put("Status", "pong");
+    executeAnswer.result.put("VerbeAcknowledge", parameters.verb);
+    
+    String traceInput="Receive:";
+    if (parameters!=null && parameters.parameters !=null)
+      for (String key:parameters.parameters.keySet())
+      {
+        traceInput+=key+",";
+      }
+    executeAnswer.result.put("traceInput", traceInput);
+    return executeAnswer;
+}
   
 
 
