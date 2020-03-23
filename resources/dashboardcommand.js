@@ -54,16 +54,23 @@ appCommand.controller('CommandsController',
 		var url='?page=custompage_cmdmanage&action=listcmd&t='+t;
 		
 		$http.get(url)
-		.success( function ( result ) {
+		.success(function(jsonResult, statusHttp, headers, config) {
+	
+			// connection is lost ?
+			if (statusHttp==401 || typeof jsonResult === 'string') {
+				console.log("Redirected to the login page !");
+				window.location.reload();
+			}
+			
 				// console.log('getList='+angular.toJson(result));
-			self.listcmdsystem = result.listcmdsystem;
-			self.listcmdcustom = result.listcmdcustom;
+			self.listcmdsystem = jsonResult.listcmdsystem;
+			self.listcmdcustom = jsonResult.listcmdcustom;
 			self.messageList='';
 			self.inprogress=false;
 				})
-		.error( function ( result ) {
+		.error( function ( jsonResult ) {
 			console.log('error');
-			self.messageList=result;
+			self.messageList=jsonResult;
 			self.inprogress=false;
 				}
 				);
@@ -81,15 +88,22 @@ appCommand.controller('CommandsController',
 		self.inprogress=true;
 			
 		$http.get(url)
-		.success( function ( result ) {
+		.success(function(jsonResult, statusHttp, headers, config) {
+	
+			// connection is lost ?
+			if (statusHttp==401 || typeof jsonResult === 'string') {
+				console.log("Redirected to the login page !");
+				window.location.reload();
+			}
+
 			console.log('undeploy '+result);
-			self.listcmdsystem = result.listcmdsystem;
-			self.listcmdcustom = result.listcmdcustom;
+			self.listcmdsystem = jsonResult.listcmdsystem;
+			self.listcmdcustom = jsonResult.listcmdcustom;
 			self.messageList='';
 			self.inprogress=false;
 				})
-		.error( function ( result ) {
-			self.messageList=result;
+		.error( function ( jsonResult ) {
+			self.messageList=jsonResult;
 			self.inprogress=false;
 								}
 				);
@@ -113,19 +127,26 @@ appCommand.controller('CommandsController',
 			var json = encodeURI( angular.toJson( self.cmd, false));
 			var url='?page=custompage_cmdmanage&action=deploy&paramjson='+json+"&t="+d.getTime();
 			
-			$http.get( url )
-				.success( function ( jsonResult ) {
-					self.message =jsonResult.message;
-					self.errormessage =jsonResult.errormessage;
-					self.inprogress=false;
-					self.listcmdsystem = jsonResult.listcmdsystem;
-					self.listcmdcustom = jsonResult.listcmdcustom;
-														
-					})
-				.error( function ( result ) {
-					self.message ='Error during deployment '+result,1;
-					self.inprogress=false;
-					});
+			$http.get(url)
+			.success(function(jsonResult, statusHttp, headers, config) {
+		
+				// connection is lost ?
+				if (statusHttp==401 || typeof jsonResult === 'string') {
+					console.log("Redirected to the login page !");
+					window.location.reload();
+				}
+
+				self.message =jsonResult.message;
+				self.errormessage =jsonResult.errormessage;
+				self.inprogress=false;
+				self.listcmdsystem = jsonResult.listcmdsystem;
+				self.listcmdcustom = jsonResult.listcmdcustom;
+													
+				})
+			.error( function ( jsonResult ) {
+				self.message ='Error during deployment '+jsonResult;
+				self.inprogress=false;
+				});
 
 		};
 		
@@ -186,17 +207,23 @@ appCommand.controller('CommandsController',
 			var jsonparam= {'id': self.callcmd.id, 'parameters':parameters};
 			var json = encodeURI( angular.toJson( jsonparam, false));
 			var url='?page=custompage_cmdmanage&action=callcmd&paramjson='+json+"&t="+d.getTime();
-			
-			$http.get( url )
-				.success( function ( jsonResult ) {
-					self.callmessage =jsonResult.message;
-					self.callerrormessage =jsonResult.errormessage;
-					self.inprogress=false;
-					})
-				.error( function ( result ) {
-					self.callerrormessage ='Error during call '+result;
-					self.inprogress=false;
-					});
+
+			$http.get(url)
+			.success(function(jsonResult, statusHttp, headers, config) {
+		
+				// connection is lost ?
+				if (statusHttp==401 || typeof jsonResult === 'string') {
+					console.log("Redirected to the login page !");
+					window.location.reload();
+				}
+				self.callmessage =jsonResult.message;
+				self.callerrormessage =jsonResult.errormessage;
+				self.inprogress=false;
+				})
+			.error( function ( jsonResult ) {
+				self.callerrormessage ='Error during call '+jsonResult;
+				self.inprogress=false;
+				});
 
 		}
 			

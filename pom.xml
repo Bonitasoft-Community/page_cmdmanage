@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bonitasoft.cmdManage</groupId>
 	<artifactId>CommandManage</artifactId>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<properties>
 		<bonita.version>7.8.4</bonita.version>
 	</properties>
@@ -15,12 +15,7 @@
 			<version>${bonita.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.bonitasoft.engine</groupId>
-			<artifactId>bonita-server</artifactId>
-			<version>${bonita.version}</version>
-			<scope>provided</scope>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>org.bonitasoft.log.event</groupId>
@@ -32,7 +27,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.command</groupId>
 			<artifactId>bonita-commanddeployment</artifactId>
-			<version>1.1.0</version>
+			<version>1.6</version>
 		</dependency>
 
 
@@ -62,40 +57,9 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
-
 	<build>
-		<!-- <sourceDirectory>src</sourceDirectory> <resources> <resource> <directory>src</directory> <excludes> <exclude>**/*.java</exclude> </excludes> </resource> </resources> -->
-
+		<!-- ******************** Copy JAR files under lib **************** -->
 		<plugins>
-			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <version>3.7.0</version> <configuration> <source>1.7</source> <target>1.7</target> </configuration> </plugin> -->
-
-
-			<!-- direct jar file -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/target</outputDirectory>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>false</overWriteSnapshots>
-							<overWriteIfNewer>true</overWriteIfNewer>
-							<excludeScope>provided</excludeScope>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			
-			
-			<!-- ******************** Copy JAR files under lib **************** -->		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -146,89 +110,7 @@
 
 				</executions>
 			</plugin>
-			<!-- generate a ZIP file -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
-					<execution>
-						<id>page-content</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<inherited>false</inherited>
-						<configuration>
-							<finalName>${project.build.finalName}-${project.version}</finalName>
-							<ignoreDirFormatExtensions>true</ignoreDirFormatExtensions>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>content.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
-			<!-- generate a JAR file with all dependencies, except the provided one -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
-
-				<configuration>
-					<archive>
-						<!-- not really use: the jar is not a executable one -->
-						<manifest>
-							<mainClass>org.bonitasoft.cmd.CmdPing</mainClass>
-						</manifest>
-					</archive>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<dependencySets>
-						<dependencySet>
-							<excludeScope>provided</excludeScope>
-						</dependencySet>
-					</dependencySets>
-
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- ******************** Copy dependencies -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.1.1</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/lib</outputDirectory>
-							<overWriteReleases>true</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-							<excludeTransitive>true</excludeTransitive>
-							<excludeScope>provided</excludeScope>
-						</configuration>
-					</execution>
-
-
-				</executions>
-			</plugin>
 			<!-- ******************** Generate the Resource (ZIP FILE) -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -280,15 +162,13 @@
 								<!-- use UPDATE or DELETEANDADD -->
 								<argument>strategy:UPDATE</argument>
 								<argument>profile:BOTools</argument>
+
 							</arguments>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
-
-
 		</plugins>
 	</build>
-
 </project>

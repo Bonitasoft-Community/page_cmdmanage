@@ -26,6 +26,9 @@ import org.codehaus.groovy.tools.shell.CommandAlias;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
 
+import org.bonitasoft.console.common.server.page.PageContext
+import org.bonitasoft.console.common.server.page.PageController
+import org.bonitasoft.console.common.server.page.PageResourceProvider
 
 import org.bonitasoft.console.common.server.page.PageContext
 import org.bonitasoft.console.common.server.page.PageController
@@ -37,6 +40,7 @@ import org.bonitasoft.engine.exception.CreationException;
 
 import org.bonitasoft.engine.api.TenantAPIAccessor;
 import org.bonitasoft.engine.session.APISession;
+
 import org.bonitasoft.engine.api.ProcessAPI;
 import org.bonitasoft.engine.api.IdentityAPI;
 import org.bonitasoft.engine.api.CommandAPI;
@@ -95,9 +99,9 @@ public class Actions {
             
             APISession apiSession = pageContext.getApiSession();
             HttpSession httpSession = request.getSession();            
-            ProcessAPI processAPI = TenantAPIAccessor.getProcessAPI(apiSession);
-            IdentityAPI identityAPI = TenantAPIAccessor.getIdentityAPI(apiSession);
-            CommandAPI commandAPI = TenantAPIAccessor.getCommandAPI(apiSession);
+            ProcessAPI processAPI = TenantAPIAccessor.getProcessAPI( apiSession );
+            IdentityAPI identityAPI = TenantAPIAccessor.getIdentityAPI( apiSession );
+            CommandAPI commandAPI = TenantAPIAccessor.getCommandAPI( apiSession );
 
             long tenantId = apiSession.getTenantId();          
             TenantServiceAccessor tenantServiceAccessor = TenantServiceSingleton.getInstance(tenantId);             
