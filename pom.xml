@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.bonitasoft.cmdManage</groupId>
-	<artifactId>CommandManage</artifactId>
-	<version>2.1.1</version>
+	<groupId>org.bonitasoft.custompage</groupId>
+	<artifactId>bonita-commandmanage</artifactId>
+	<version>2.2.0</version>
 	<properties>
-		<bonita.version>7.8.4</bonita.version>
+		<bonita.version>7.11.0</bonita.version>
 	</properties>
 	<dependencies>
 
@@ -20,14 +20,14 @@
 		<dependency>
 			<groupId>org.bonitasoft.log.event</groupId>
 			<artifactId>bonita-event</artifactId>
-			<version>1.7.0</version>
+			<version>1.9.0</version>
 
 		</dependency>
 
 		<dependency>
 			<groupId>org.bonitasoft.command</groupId>
 			<artifactId>bonita-commanddeployment</artifactId>
-			<version>1.6</version>
+			<version>2.1.0</version>
 		</dependency>
 
 
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.store</groupId>
 			<artifactId>bonita-store</artifactId>
-			<version>1.1.0</version>
+			<version>2.3.0</version>
 		</dependency>
 
 
