@@ -96,7 +96,7 @@ appCommand.controller('CommandsController',
 				window.location.reload();
 			}
 
-			console.log('undeploy '+result);
+			console.log('undeploy '+jsonResult);
 			self.listcmdsystem = jsonResult.listcmdsystem;
 			self.listcmdcustom = jsonResult.listcmdcustom;
 			self.messageList='';
