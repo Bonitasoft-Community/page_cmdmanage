@@ -12,9 +12,9 @@
     <title>Command Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="pageResource?page=custompage_cmdmanage&location=style/animate.css" />
-    <link rel="stylesheet" href="pageResource?page=custompage_cmdmanage&location=style/bootstrap.min.css">
-	<link rel="stylesheet" href="pageResource?page=custompage_cmdmanage&location=style/main.css">
+    <link rel="stylesheet" href="style/animate.css" />
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="style/main.css">
 </head>
 
 <style>
@@ -34,7 +34,7 @@
 
 <div class="container" >
 <h1>Commands </h1>
-V2.2.1
+V2.3.0
 <div class="col-lg-12" ng-controller="CommandsController as ctrl">
 
 	<ul class="nav nav-tabs"  ng-class="{'nav-stacked': vertical, 'nav-justified': justified}" ng-transclude>
@@ -192,20 +192,20 @@ V2.2.1
 					</td>
 				</tr>					
 				<tr>
-					<td>
-						<button class="btn btn-info" title="Call command" ng-click="ctrl.callcommand()" ng-disable="ctrl.inprogress">Call</button><br>
+					<td style="padding: 10px">
+						<button class="btn btn-info btn-xs" title="Call command" ng-click="ctrl.callcommand()" ng-disable="ctrl.inprogress">Call</button><br>
 					</td><td>
 						<span style="font-size:12px;color:#007DB3">Call the command with parameters</span>
 					</td>
 				</tr><tr>
-					<td>
-						<button class="btn btn-info" title="Ping the command" ng-click="ctrl.callping()" ng-disable="ctrl.inprogress">Ping</button><br>
+					<td style="padding: 10px">
+						<button class="btn btn-info btn-xs" title="Ping the command" ng-click="ctrl.callping()" ng-disable="ctrl.inprogress">Ping</button><br>
 					</td><td>
 						<span style="font-size:12px;color:#007DB3">Call a verb=ping to the command</span>
 					</td>
 				</tr><tr>
-					<td>
-						<button class="btn btn-info" title="Ask help" ng-click="ctrl.callhelp()" ng-disable="ctrl.inprogress">Help</button><br>
+					<td style="padding: 10px">
+						<button class="btn btn-info btn-xs" title="Ask help" ng-click="ctrl.callhelp()" ng-disable="ctrl.inprogress">Help</button><br>
 					</td><td>
 						<span style="font-size:12px;color:#007DB3">Call a verb=help to the command</span>
 					</td>
@@ -227,18 +227,18 @@ V2.2.1
 
 <!-- Third party dependencies -->
 
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/jquery.min.js"></script>
+<script src="3rd-party/jquery.min.js"></script>
 
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/angular.min.js"></script>
+<script src="3rd-party/angular.min.js"></script>
 
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/angular-resource.min.js"></script>
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/angular-cookies.min.js"></script>
+<script src="3rd-party/angular-resource.min.js"></script>
+<script src="3rd-party/angular-cookies.min.js"></script>
 
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/bootstrap/js/bootstrap.min.js"></script>
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/angular-bootstrap-tpls.min.js"></script>
+<script src="3rd-party/bootstrap/js/bootstrap.min.js"></script>
+<script src="3rd-party/angular-bootstrap-tpls.min.js"></script>
 
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/angular-bootstrap-tpls.min.js"></script>
-<script src="pageResource?page=custompage_cmdmanage&location=3rd-party/angular-file-upload.js"></script> 
+<script src="3rd-party/angular-bootstrap-tpls.min.js"></script>
+<script src="3rd-party/angular-file-upload.js"></script> 
 
 
 <!-- Application dependencies -->

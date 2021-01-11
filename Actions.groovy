@@ -96,6 +96,11 @@ public class Actions {
             }
             actionAnswer.isManaged=true;
             
+            if (! TokenValidator.checkCSRFToken(request, response)) {
+                actionAnswer.isResponseMap=false;
+                return actionAnswer;
+            }
+            
             APISession apiSession = pageContext.getApiSession();
             HttpSession httpSession = request.getSession();            
             ProcessAPI processAPI = TenantAPIAccessor.getProcessAPI( apiSession );
@@ -110,7 +115,6 @@ public class Actions {
          // ------------------------ undeploy
             if ("undeploy".equals(action))
             {
-              
               long cmdId = Index.getLongParameter(request,"cmdid",-1);
               if (cmdId==-1)
               {

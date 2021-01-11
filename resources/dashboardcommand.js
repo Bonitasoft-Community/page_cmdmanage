@@ -5,7 +5,7 @@
 
 (function() {
 
-var appCommand = angular.module('bonitacommands', ['ui.bootstrap','angularFileUpload']);
+var appCommand = angular.module('bonitacommands', ['ui.bootstrap','angularFileUpload',  'ngCookies']);
 
 
 // appCommand.config();
@@ -17,7 +17,7 @@ appCommand.constant('RESOURCE_PATH', 'pageResource?page=custompage_cmdmanage&loc
 	   
 // User app list controller
 appCommand.controller('CommandsController', 
-	function ( $scope, $http, $upload) {
+	function ( $scope, $http, $upload, $cookies) {
 	this.list = {items : [], pageIndex : 0, pageSize : 5, totalCount : 0};
 	this.messageList='';
 	
@@ -38,7 +38,17 @@ appCommand.controller('CommandsController',
 		return 'ng-isolate-scope';
 	}
 	
-
+	
+	this.getHttpConfig = function () {
+		var additionalHeaders = {};
+		var csrfToken = $cookies['X-Bonita-API-Token'];
+		if (csrfToken) {
+			additionalHeaders ['X-Bonita-API-Token'] = csrfToken;
+		}
+		var config= {"headers": additionalHeaders};
+		console.log("GetHttpConfig : "+angular.toJson( config));
+		return config;
+	}
 	
 	
 	this.refresh = function()
@@ -53,9 +63,9 @@ appCommand.controller('CommandsController',
 		
 		var url='?page=custompage_cmdmanage&action=listcmd&t='+t;
 		
-		$http.get(url)
+		$http.get(url,  this.getHttpConfig())
 		.success(function(jsonResult, statusHttp, headers, config) {
-	
+			console.log("refresh.success");
 			// connection is lost ?
 			if (statusHttp==401 || typeof jsonResult === 'string') {
 				console.log("Redirected to the login page !");
@@ -87,7 +97,7 @@ appCommand.controller('CommandsController',
 		self.errormessage='';
 		self.inprogress=true;
 			
-		$http.get(url)
+		$http.get(url,  this.getHttpConfig())
 		.success(function(jsonResult, statusHttp, headers, config) {
 	
 			// connection is lost ?
@@ -127,7 +137,7 @@ appCommand.controller('CommandsController',
 			var json = encodeURI( angular.toJson( self.cmd, false));
 			var url='?page=custompage_cmdmanage&action=deploy&paramjson='+json+"&t="+d.getTime();
 			
-			$http.get(url)
+			$http.get(url,  this.getHttpConfig())
 			.success(function(jsonResult, statusHttp, headers, config) {
 		
 				// connection is lost ?
@@ -208,7 +218,7 @@ appCommand.controller('CommandsController',
 			var json = encodeURI( angular.toJson( jsonparam, false));
 			var url='?page=custompage_cmdmanage&action=callcmd&paramjson='+json+"&t="+d.getTime();
 
-			$http.get(url)
+			$http.get(url,  this.getHttpConfig())
 			.success(function(jsonResult, statusHttp, headers, config) {
 		
 				// connection is lost ?
